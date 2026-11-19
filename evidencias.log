@@ -1,0 +1,42 @@
+Thu Nov 19 09:13:30 -03 2026
+murilo
+/Users/murilo/dev/college/infra-so/cmocf-vm
+Script started on Thu Nov 19 09:13:30 2026
+Command: bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[?1034hbash-3.2$ make
+make: Nothing to be done for `all'.
+bash-3.2$ make clean
+rm -f vm vm.o
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ make
+gcc -Wall -Wextra -std=c11 -pthread -c vm.c -o vm.o
+gcc -Wall -Wextra -std=c11 -pthread -o vm vm.o
+bash-3.2$ ./vm addresses [K.txt lru [K
+Error: expected 3 arguments, got 2
+Usage: ./vm <address_file> <fifo|lru> <fifo|lru>
+       (page replacement algorithm, then TLB replacement algorithm)
+bash-3.2$ .vm[K[K[K./vm
+Error: expected 3 arguments, got 0
+Usage: ./vm <address_file> <fifo|lru> <fifo|lru>
+       (page replacement algorithm, then TLB replacement algorithm)
+bash-3.2$ ./vmaddres[K[K[K[K[K [K[K adre[K[Kdresses [K.txt lru fifo 
+Arguments OK: file=addresses.txt page_alg=lru tlb_alg=fifo
+bash-3.2$ ./vm addresses lfu fifo [K
+Error: invalid page replacement algorithm 'lfu' (use fifo or lru)
+bash-3.2$ ./vm addresses lfu fifo[K[K[K[K[K[K[Kru xyx[Kz
+Error: invalid TLB replacement algorithm 'xyz' (use fifo or lru)
+bash-3.2$ ./vm addresses lru xyz[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Knopte [K[Ke.[K[K[Ke.txt lru fifo
+Error: cannot open address file 'nope.txt': No such file or directory
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ echo #[K*#[K[K*#[K@[K@[K[K#[K$?
+0
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ exit
+exit
+
+Command exit status: 0
+Script done on Thu Nov 19 09:14:36 2026
