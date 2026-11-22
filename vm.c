@@ -6,7 +6,12 @@
 
 char memory[NUM_FRAMES][PAGE_SIZE];
 int page_table[NUM_PAGES];
+int frame_to_page[NUM_FRAMES];
+int frame_loaded_at[NUM_FRAMES];
+int frame_last_used[NUM_FRAMES];
 int frames_used = 0;
+
+int now = 0;
 
 FILE *backing_store = NULL;
 
@@ -101,11 +106,18 @@ int parse_args(int argc, char *argv[], Config *cfg)
 
 int choose_frame(Algorithm alg)
 {
-    (void)alg;
     if (frames_used < NUM_FRAMES)
         return frames_used++;
-    fprintf(stderr, "Error: physical memory is full\n");
-    return -1;
+
+    int *times = (alg == ALG_FIFO) ? frame_loaded_at : frame_last_used;
+    int victim = 0;
+    for (int i = 1; i < NUM_FRAMES; i++) {
+        if (times[i] < times[victim])
+            victim = i;
+    }
+
+    page_table[frame_to_page[victim]] = -1;
+    return victim;
 }
 
 int load_page(int page, Algorithm alg)
@@ -121,6 +133,8 @@ int load_page(int page, Algorithm alg)
     }
 
     page_table[page] = frame;
+    frame_to_page[frame] = page;
+    frame_loaded_at[frame] = now;
     return frame;
 }
 
@@ -158,6 +172,7 @@ int run(const Config *cfg)
     char line[64];
 
     while (fgets(line, sizeof line, in) != NULL) {
+        now++;
         int address = atoi(line);
         int page = address / PAGE_SIZE;
         int offset = address % PAGE_SIZE;
@@ -173,6 +188,8 @@ int run(const Config *cfg)
                 break;
             }
         }
+
+        frame_last_used[frame] = now;
 
         fprintf(out, "Virtual address: %d Physical address: %d Value: %d\n", address,
                 frame * PAGE_SIZE + offset, memory[frame][offset]);
