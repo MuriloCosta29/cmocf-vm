@@ -11,6 +11,11 @@ int frame_loaded_at[NUM_FRAMES];
 int frame_last_used[NUM_FRAMES];
 int frames_used = 0;
 
+int tlb_page[TLB_SIZE];
+int tlb_frame[TLB_SIZE];
+int tlb_loaded_at[TLB_SIZE];
+int tlb_last_used[TLB_SIZE];
+
 int now = 0;
 
 FILE *backing_store = NULL;
@@ -104,6 +109,41 @@ int parse_args(int argc, char *argv[], Config *cfg)
     return validate_address_file(cfg->address_file);
 }
 
+int tlb_find(int page)
+{
+    for (int i = 0; i < TLB_SIZE; i++) {
+        if (tlb_page[i] == page)
+            return i;
+    }
+    return -1;
+}
+
+int tlb_choose_slot(Algorithm alg)
+{
+    for (int i = 0; i < TLB_SIZE; i++) {
+        if (tlb_page[i] == -1)
+            return i;
+    }
+
+    int *times = (alg == ALG_FIFO) ? tlb_loaded_at : tlb_last_used;
+    int victim = 0;
+    for (int i = 1; i < TLB_SIZE; i++) {
+        if (times[i] < times[victim])
+            victim = i;
+    }
+    return victim;
+}
+
+int tlb_add(int page, int frame, Algorithm alg)
+{
+    int slot = tlb_choose_slot(alg);
+    tlb_page[slot] = page;
+    tlb_frame[slot] = frame;
+    tlb_loaded_at[slot] = now;
+    tlb_last_used[slot] = now;
+    return slot;
+}
+
 int choose_frame(Algorithm alg)
 {
     if (frames_used < NUM_FRAMES)
@@ -116,7 +156,11 @@ int choose_frame(Algorithm alg)
             victim = i;
     }
 
-    page_table[frame_to_page[victim]] = -1;
+    int old_page = frame_to_page[victim];
+    page_table[old_page] = -1;
+    int old_slot = tlb_find(old_page);
+    if (old_slot != -1)
+        tlb_page[old_slot] = -1;
     return victim;
 }
 
@@ -142,6 +186,8 @@ void init_tables(void)
 {
     for (int i = 0; i < NUM_PAGES; i++)
         page_table[i] = -1;
+    for (int i = 0; i < TLB_SIZE; i++)
+        tlb_page[i] = -1;
 }
 
 int run(const Config *cfg)
@@ -168,7 +214,7 @@ int run(const Config *cfg)
 
     init_tables();
 
-    int total = 0, faults = 0, result = 0;
+    int total = 0, faults = 0, tlb_hits = 0, result = 0;
     char line[64];
 
     while (fgets(line, sizeof line, in) != NULL) {
@@ -178,20 +224,30 @@ int run(const Config *cfg)
         int offset = address % PAGE_SIZE;
         int frame;
 
-        frame = page_table[page];
-        if (frame == -1) {
-            /* page fault */
-            faults++;
-            frame = load_page(page, cfg->page_alg);
+        int slot = tlb_find(page);
+        if (slot != -1) {
+            /* TLB hit */
+            tlb_hits++;
+            frame = tlb_frame[slot];
+            tlb_last_used[slot] = now;
+        } else {
+            /* TLB miss: look in the page table */
+            frame = page_table[page];
             if (frame == -1) {
-                result = -1;
-                break;
+                /* page fault */
+                faults++;
+                frame = load_page(page, cfg->page_alg);
+                if (frame == -1) {
+                    result = -1;
+                    break;
+                }
             }
+            slot = tlb_add(page, frame, cfg->tlb_alg);
         }
 
         frame_last_used[frame] = now;
 
-        fprintf(out, "Virtual address: %d Physical address: %d Value: %d\n", address,
+        fprintf(out, "Virtual address: %d TLB: %d Physical address: %d Value: %d\n", address, slot,
                 frame * PAGE_SIZE + offset, memory[frame][offset]);
         total++;
     }
@@ -199,6 +255,8 @@ int run(const Config *cfg)
     fprintf(out, "Number of Translated Addresses = %d\n", total);
     fprintf(out, "Page Faults = %d\n", faults);
     fprintf(out, "Page Fault Rate = %.3f\n", (double)faults / total);
+    fprintf(out, "TLB Hits = %d\n", tlb_hits);
+    fprintf(out, "TLB Hit Rate = %.3f\n", (double)tlb_hits / total);
 
     fclose(in);
     fclose(backing_store);
