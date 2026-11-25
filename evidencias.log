@@ -40,3 +40,26 @@ exit
 
 Command exit status: 0
 Script done on Thu Nov 19 09:14:36 2026
+Mon Nov 23 16:51:15 -03 2026
+murilo
+/Users/murilo/dev/college/infra-so/cmocf-vm
+Script started on Mon Nov 23 16:51:15 2026
+Command: bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[?1034hbash-3.2$ clear
+[3J[H[2Jbash-3.2$ ./bm ad[K[K[K[K[Kvm addresses.txt lru
+Error: expected 3 arguments, got 2
+Usage: ./vm <address_file> <fifo|lru> <fifo|lru>
+       (page replacement algorithm, then TLB replacement algorithm)
+bash-3.2$ ./ [Kvm addresses.txt xyz fifo
+Error: invalid page replacement algorithm 'xyz' (use fifo or lru)
+bash-3.2$ ./bm [K[K[Kvm nao [K_existe.txt lru fifo
+Error: cannot open address file 'nao_existe.txt': No such file or directory
+bash-3.2$ exit
+exit
+
+Command exit status: 1
+Script done on Mon Nov 23 16:51:43 2026
