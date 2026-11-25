@@ -116,7 +116,7 @@ typedef struct {
     int found;
 } TlbSearch;
 
-static void *tlb_search_thread(void *arg)
+void *tlb_search_thread(void *arg)
 {
     TlbSearch *s = arg;
     s->found = (tlb_page[s->slot] == s->page);

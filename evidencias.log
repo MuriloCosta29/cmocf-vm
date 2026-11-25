@@ -63,3 +63,373 @@ exit
 
 Command exit status: 1
 Script done on Mon Nov 23 16:51:43 2026
+Wed Nov 25 16:43:36 -03 2026
+murilo
+/Users/murilo/dev/college/infra-so/cmocf-vm
+Script started on Wed Nov 25 16:43:36 2026
+Command: bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[?1034hbash-3.2$ make clean 
+rm -f vm vm.o
+bash-3.2$ make
+gcc -Wall -Wextra -std=c11 -pthread -c vm.c -o vm.o
+gcc -Wall -Wextra -std=c11 -pthread -o vm vm.o
+ld: warning: reducing alignment of section __DATA,__common from 0x8000 to 0x4000 because it exceeds segment maximum alignment
+bash-3.2$ ./vm adr[Kdresses.txt fifo fifo
+bash-3.2$ tail co[K[K-r[K5 correct.txt 
+Number of Translated Addresses = 1000
+Page Faults = 538
+Page Fault Rate = 0.538
+TLB Hits = 54
+TLB Hit Rate = 0.054
+bash-3.2$ echo [K[K[K[K[Kprintf 'abc [K\n [K [K' > limite[K[K[K[K[K[K[K ruim [K.txt [K; ./vm ruim [K.txt[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+bash-3.2$ ls
+06_vm.docx.pdf
+addresses.txt
+BACKING_STORE.bin
+correct.txt
+evidencias.log
+evidencias.sh
+Guia_de_Relatorios-2.docx
+imagem.png
+Makefile
+README.md
+Relatorio_VM_preenchido.docx
+ruim.txt
+vm
+vm.c
+vm.h
+vm.o
+bash-3.2$ ls | grep p[Kruim
+ruim.txt
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ ls[K[K./vm ruim.txt lru fifo
+Error: invalid address at line 1 of 'ruim.txt' (expected one integer between 0 and 65535 per line)
+bash-3.2$ echo "rc%[K=%[K&[K$?"
+rc=1
+bash-3.2$ lear[K[K[K[Kl[Ke[Ks[Ks[Kecho [K[K[K[K[K=[Ksat[K[K[Kclear
+[3J[H[2Jbash-3.2$ clear/[K[K[K[K[K[Kprintf '0=[K\n [K65535'[K\n' > limite [K.txt
+bash-3.2$ ./ [Kvm limite.txt lru fifo
+bash-3.2$ cat correct.txt 
+Virtual address: 0 TLB: 0 Physical address: 0 Value: 0
+Virtual address: 65535 TLB: 1 Physical address: 511 Value: -1
+Number of Translated Addresses = 2
+Page Faults = 2
+Page Fault Rate = 1.000
+TLB Hits = 0
+TLB Hit Rate = 0.000
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ /var/folders/tv/0t8t5wj917n272n4jcdmm0zh0000gn/T /rex-clipboard-94AAB776-A538-49BD-909F-597F8E14E57B.png
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ /var/folders/tv/0t8t5wj917n272n4jcdmm0zh0000gn/T /rex-clipboard-94AAB776-A538-49BD-909F-597F8E14E57B.png
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ ./vm addresses.txt lru fifo; echo "rc=$?"; tail  -5 correct.txt
+rc=0
+Number of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 54
+TLB Hit Rate = 0.054
+bash-3.2$ 
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ ./vm addresses.txt lru fifo; echo "rc=$?"; tail  -5 correct.txt[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+rc=0
+Number of Translated Addresses = 1000
+Page Faults = 539
+Page Fault Rate = 0.539
+TLB Hits = 54
+TLB Hit Rate = 0.054
+bash-3.2$ 
+bash-3.2$ ./vm addresses.txt lru fifo; echo "rc=$?"; tail --5 correct.txt=[Aclear[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru fifo; echo "rc=$?"; tail --5 correct.txt[Aclear[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt lru fifo; echo "rc=$?"; tail --5 correct.txt[Aclear[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C 
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ ./vm addresses.txt fifo fifo; tail -5 correct.tx t
+Number of Translated Addresses = 1000
+Page Faults = 538
+Page Fault Rate = 0.538
+TLB Hits = 54
+TLB Hit Rate = 0.054
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ printf 'abc\n' > ruim.txt; ./vm ruim.txt lru fif o; echo "rc=$?"
+Error: invalid address at line 1 of 'ruim.txt' (expected one integer between 0 and 65535 per line)
+rc=1
+bash-3.2$ printf 'abc\n' > ruim.txt; ./vm ruim.txt lru fif o; echo "rc=$?"
+Error: invalid address at line 1 of 'ruim.txt' (expected one integer between 0 and 65535 per line)
+rc=1
+bash-3.2$ 
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ printf 'abc\n' > ruim.txt; ./vm ruim.txt lru fif o; echo "rc=$?"
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ print [Kf '[3Pclear
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ clearprintf 'abc\n' > ruim.txt; ./vm ruim.txt lru fifoo; echo "rc=$?"[Aclear[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C./vm addresses.txt fifo fifo; tail -5 correct.txtt[A[C[C[C[C[C[C[C[C[Cclear[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+bash-3.2$ ho[Kistro[K[Kory
+    1  exit
+    2  exitr
+    3  exit
+    4  exit
+    5  echo "hello"
+    6  exit
+    7  ls
+    8  ls 1
+    9  ls -1
+   10  clear
+   11  exit
+   12  ls
+   13  clear
+   14  ls
+   15  exit
+   16  make
+   17  clear
+   18  ./sync_car.c
+   19  pwd
+   20  ls
+   21  clear
+   22  ./sync_car
+   23  exit
+   24  make test
+   25  exit
+   26  make test
+   27  exit
+   28  clear
+   29  ls
+   30  clear
+   31  exit
+   32  pwd
+   33  clear
+   34  ls
+   35  script -a evidencias.log
+   36  ls
+   37  cat evidencias.log 
+   38  clear
+   39  ls
+   40  exit
+   41  cc -Wall -Wextra -c banker.c /dev/null
+   42  exit
+   43  cc -Wall -Wextra -c banker.c /dev/null
+   44  pwd
+   45  exit
+   46  cc -Wall -Wextra -c banker.c /dev/null
+   47  exit
+   48  cc -Wall -Wextra -c banker.c -o /dev/null
+   49  clear
+   50  exit
+   51  cc -Wall -Wextra -c banker.c -o /dev/null
+   52  exit
+   53  make
+   54  clear
+   55  ./banker 
+   56  ./banker a b c
+   57  clear
+   58  ./banker 10 5 7
+   59  ls
+   60  cat result.txt 
+   61  rm -rf result.txt 
+   62  clear
+   63  ./banker 10 5 7
+   64  ls
+   65  cat result.txt 
+   66  rm -rf result.txt 
+   67  clear
+   68  ls
+   69  ./banker 0 0 0
+   70  clear
+   71  l
+   72  clear
+   73  ls
+   74  cat result.txt 
+   75  clear
+   76  make celan
+   77  make clean
+   78  clear
+   79  exit
+   80  ./banker 10 5 7; echo "exit=$?"
+   81  diff result.txt /tmp/result.professor.txt && echo "SAIDA IDENTICA AO result.txt DO PROFESSOR"
+   82  cat result.txt
+   83  clear
+   84  ls
+   85  ORIG=$(pwd); rm -rf /tmp/erros && mkdir /tmp/erros
+   86  cp banker customer.txt commands.txt /tmp/erros && cd /tmp/erros
+   87  clear
+   88  pwd
+   89  diff result.txt /tmp/result.professor.txt
+   90  clear
+   91  clear
+   92  ls
+   93  lsa
+   94  clear
+   95  ls -lah
+   96  pwd
+   97  ..
+   98  ..
+   99  cd ../../
+  100  clear
+  101  ls
+  102  cd Users/
+  103  ls
+  104  cd murilo/
+  105  ls
+  106  cd dev/college/infra-so/cmocf-deadlock
+  107  clear
+  108  ls
+  109  pwd
+  110  clear
+  111  ls
+  112  cat result.txt 
+  113  exit
+  114  ls cat customer.txt 
+  115  clear
+  116  ls
+  117  cat customer.txt 
+  118  cat commands.txt 
+  119  make clean
+  120  make 
+  121  ./banker 10 5 7
+  122  cat result.txt 
+  123  diff result.txt /tmp/result.professor.txt
+  124  make
+  125  mkdir /tmp/t && cp banker customer.txt commands.txt /tmp/t && cd /tmp/t
+  126  pwd
+  127  ./banker 10 5
+  128  ./banker 10 5 7 1
+  129  ./banker a b c
+  130  ./banker 10 -5 7
+  131  echo $1
+  132  echo $?
+  133  echo 0 = correto e 1 = deu ruim
+  134  echo "7,5,3" > customer.txt && echo "3,2" >> customer.txt 
+  135  cat customer.txt 
+  136  ./banker 10 5 7
+  137  echo "7,x,3" > customer.txt
+  138  ./banker 10 5 7
+  139  rm customer.txt 
+  140  ./banker 10 5 7
+  141  echo $? 
+  142  cp ~/dev/college/infra-so/cmocf-deadlock/customer.txt .
+  143  echo "RQ 9 0 0 1" > commands.txt
+  144  ./banker 10 5 7
+  145  echo "RQ 0 -1 0 0" > commands.txt
+  146  echo "RQ 0 0 0" > commands.txt
+  147  ./banker 10 5 7
+  148  echo "XX 0 0 0 0" > commands.txt
+  149  ./banker 10 5 7
+  150  clear
+  151  rm commands.txt
+  152  ./banker 10 5 7
+  153  echo $?
+  154  cd ~/dev/college/infra-so/cmocf-deadlock
+  155  git status
+  156  exit
+  157  make clean
+  158  make
+  159  ./banker 10 5 7
+  160  exit
+  161  make
+  162  make clean
+  163  clear
+  164  make
+  165  ./vm addresses.txt lru
+  166  ./vm
+  167  ./vm addresses.txt lru fifo 
+  168  ./vm addresses lfu fifo
+  169  ./vm addresses lru xyz
+  170  ./vm nope.txt lru fifo
+  171  clear
+  172  echo $?
+  173  clear
+  174  exit
+  175  clear
+  176  ./vm addresses.txt lru
+  177  ./vm addresses.txt xyz fifo
+  178  ./vm nao_existe.txt lru fifo
+  179  exit
+  180  make clean 
+  181  make
+  182  ./vm addresses.txt fifo fifo
+  183  tail -5 correct.txt 
+  184  printf 'abc\n' > ruim.txt
+  185  ls
+  186  ls | grep ruim
+  187  clear
+  188  ./vm ruim.txt lru fifo
+  189  echo "rc=$?"
+  190  clear
+  191  printf '0\n65535\n' > limite.txt
+  192  ./vm limite.txt lru fifo
+  193  cat correct.txt 
+  194  clear
+  195  clear
+  196  clear
+  197  ./vm addresses.txt lru fifo; echo "rc=$?"; tail -5 correct.txt
+  198  clear
+  199* ./vm addresses.txt lru fifo; echo "rc=$?"; tail -5 correct.txt=
+  200  clear
+  201  ./vm addresses.txt fifo fifo; tail -5 correct.txt
+  202  clear
+  203  printf 'abc\n' > ruim.txt; ./vm ruim.txt lru fifo; echo "rc=$?"
+  204  printf 'abc\n' > ruim.txt; ./vm ruim.txt lru fifo; echo "rc=$?"
+  205  clear
+  206  clear
+  207  clear
+  208  history
+bash-3.2$ 204  printf 'abc\n' > ruim.txt; ./vm ruim.txt lr u fifo; echo "rc=$?"[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ 204  printf 'abc\n' > ruim.txt; ./vm ruim.txt lr u fifo; echo "rc=$?"[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ printf 'abc\n' > ruim.txt; ./vim ruim.txt lru fi fo [K; [K[K[Kifo [K; echo "rc  [K[K= [K%"[K[K$"
+bash: ./vim: No such file or directory
+rc=$
+bash-3.2$ printf 'abc\n' > ruim.txt; ./vim ruim.txt lru fiffifo; echo "rc=$"[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fifi[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fifif[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fififo[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fififo;[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fififo; [1P[A[C[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fififo; e[1P[A[C[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fififo; ec[1P[A[C[C[C[C[C[C[C[C[C[Cabc\n' > ruim.txt; ./vim ruim.txt lru fififo; ech[1P[A[C[C[C[C[C[C[C[C[C
+
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ exit
+exit
+
+Command exit status: 0
+Script done on Wed Nov 25 16:50:43 2026
+Wed Nov 25 16:50:48 -03 2026
+murilo
+/Users/murilo/dev/college/infra-so/cmocf-vm
+Script started on Wed Nov 25 16:50:48 2026
+Command: bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[?1034hbash-3.2$ clear
+[3J[H[2Jbash-3.2$ printf 'abc\n' > ruim.txt; ./vm ruim.txt lru fifo; echo "rc=$?"
+Error: invalid address at line 1 of 'ruim.txt' (expected one integer between 0 and 65535 per line)
+rc=1
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ printf '0\n65535\n' > limite.txt; ./vm limite.txt lru fifo; cat correct.txt
+Virtual address: 0 TLB: 0 Physical address: 0 Value: 0
+Virtual address: 65535 TLB: 1 Physical address: 511 Value: -1
+Number of Translated Addresses = 2
+Page Faults = 2
+Page Fault Rate = 1.000
+TLB Hits = 0
+TLB Hit Rate = 0.000
+bash-3.2$ rm ruim.txt limite.txt 
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ ls
+06_vm.docx.pdf			evidencias.sh			Relatorio_VM_preenchido.docx
+addresses.txt			Guia_de_Relatorios-2.docx	vm
+BACKING_STORE.bin		imagem.png			vm.c
+correct.txt			Makefile			vm.h
+evidencias.log			README.md			vm.o
+bash-3.2$ clear
+[3J[H[2Jbash-3.2$ exit
+exit
+
+Command exit status: 0
+Script done on Wed Nov 25 16:51:31 2026
