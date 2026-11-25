@@ -1,5 +1,6 @@
 #include "vm.h"
 #include <errno.h>
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -109,13 +110,40 @@ int parse_args(int argc, char *argv[], Config *cfg)
     return validate_address_file(cfg->address_file);
 }
 
+typedef struct {
+    int slot;
+    int page;
+    int found;
+} TlbSearch;
+
+static void *tlb_search_thread(void *arg)
+{
+    TlbSearch *s = arg;
+    s->found = (tlb_page[s->slot] == s->page);
+    return NULL;
+}
+
 int tlb_find(int page)
 {
+    pthread_t threads[TLB_SIZE];
+    TlbSearch args[TLB_SIZE];
+    int started[TLB_SIZE] = {0};
+    int result = -1;
+
     for (int i = 0; i < TLB_SIZE; i++) {
-        if (tlb_page[i] == page)
-            return i;
+        args[i] = (TlbSearch){.slot = i, .page = page, .found = 0};
+        if (pthread_create(&threads[i], NULL, tlb_search_thread, &args[i]) == 0)
+            started[i] = 1;
+        else
+            tlb_search_thread(&args[i]);
     }
-    return -1;
+    for (int i = 0; i < TLB_SIZE; i++) {
+        if (started[i])
+            pthread_join(threads[i], NULL);
+        if (args[i].found)
+            result = i;
+    }
+    return result;
 }
 
 int tlb_choose_slot(Algorithm alg)
